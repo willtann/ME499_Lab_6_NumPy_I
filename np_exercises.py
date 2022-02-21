@@ -12,6 +12,12 @@ import matplotlib.pyplot as plt
 
 
 def numpy_close(array_a, array_b, tol=1e-8):
+    """
+    :param array_a:
+    :param array_b:
+    :param tol:
+    :return:
+    """
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
@@ -19,6 +25,13 @@ def numpy_close(array_a, array_b, tol=1e-8):
 
 
 def simple_minimizer(func_in, start, end, num=100):
+    """
+    :param func_in:
+    :param start:
+    :param end:
+    :param num:
+    :return:
+    """
     # make sure that prescribed start and end points move forward
     if start > end:
         raise ValueError
@@ -35,11 +48,18 @@ def simple_minimizer(func_in, start, end, num=100):
 
 
 def simulate_dice_rolls(num_rolls, iterations):
+    """
+    :param num_rolls:
+    :param iterations:
+    :return:
+    """
     # Playing one game of die rolling num_rolls number of times and finding the sum of the rolls
     games = np.random.randint(0, num_rolls, size=(iterations, num_rolls))  # [3]
-    # Um
+    # Sum each game in its respective sub-array and represent as a number in the main array
     scores = np.sum(games, axis=1)
+    # Histogram plot
     n, bins, patches = plt.hist(scores, 50, facecolor='blue', alpha=0.5)
+    #Saving plot
     plt.savefig("dice_{}_rolls_{}.png".format(num_rolls, iterations))
     plt.show()
     return scores
@@ -61,4 +81,4 @@ if __name__ == '__main__':
     # print(np.sum(a))
 
     # print(np.array(np.sum(a), iterations))
-    print(simulate_dice_rolls(num_rolls, iterations))
+    simulate_dice_rolls(num_rolls, iterations)
