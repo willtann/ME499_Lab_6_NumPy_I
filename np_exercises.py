@@ -1,7 +1,7 @@
 #! Users/tannerwilliams/Desktop/ME499/ME499_Lab6_NumPy_I/np_exercises.py
 import numpy as np
 import random as r
-
+import matplotlib.pyplot as plt
 
 """ References:
     [1] https://www.delftstack.com/howto/numpy/python-compare-arrays/
@@ -38,6 +38,9 @@ def simulate_dice_rolls(num_rolls, iterations):
     # Playing one game of die rolling num_rolls number of times and finding the sum of the rolls
     games = np.random.randint(0, num_rolls, size=(iterations, num_rolls))  # [3]
     scores = np.sum(games, axis=1)
+    n, bins, patches = plt.hist(scores, 50, facecolor='blue', alpha=0.5)
+    plt.savefig("dice_{}_rolls_{}.png".format(num_rolls, iterations))
+    plt.show()
     return scores
 
 
@@ -57,4 +60,4 @@ if __name__ == '__main__':
     # print(np.sum(a))
 
     # print(np.array(np.sum(a), iterations))
-    simulate_dice_rolls(num_rolls, iterations)
+    print(simulate_dice_rolls(num_rolls, iterations))
