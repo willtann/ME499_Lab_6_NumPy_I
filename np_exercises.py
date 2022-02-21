@@ -37,6 +37,7 @@ def simple_minimizer(func_in, start, end, num=100):
 def simulate_dice_rolls(num_rolls, iterations):
     # Playing one game of die rolling num_rolls number of times and finding the sum of the rolls
     games = np.random.randint(0, num_rolls, size=(iterations, num_rolls))  # [3]
+    # Um
     scores = np.sum(games, axis=1)
     n, bins, patches = plt.hist(scores, 50, facecolor='blue', alpha=0.5)
     plt.savefig("dice_{}_rolls_{}.png".format(num_rolls, iterations))
