@@ -53,7 +53,7 @@ if __name__ == '__main__':
     print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
     num_rolls = 5
-    iterations = 100
+    iterations = 2000
     # print(np.zeros(num_rolls))
     # print(r.randint(0, num_rolls))
     # a = np.random.randint(0, num_rolls, num_rolls)  # [3]
