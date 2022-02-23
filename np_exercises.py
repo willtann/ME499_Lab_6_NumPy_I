@@ -143,7 +143,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 #     a = np.arange(15).reshape(3, 5)
 #     b = np.arange(15).reshape(3, 5)
 
