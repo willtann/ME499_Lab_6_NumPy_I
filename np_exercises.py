@@ -1,35 +1,37 @@
 #! Users/tannerwilliams/Desktop/ME499/ME499_Lab6_NumPy_I/np_exercises.py
 import numpy as np
-import random as r
+import random
 import matplotlib.pyplot as plt
 
 """ References:
     [1] https://www.delftstack.com/howto/numpy/python-compare-arrays/
     [2] https://numpy.org/doc/stable/reference/generated/numpy.linspace.html
     [3] https://www.studytonight.com/post/creating-random-valuedarrays-in-numpy
-    [4]
 """
 
 
 def numpy_close(array_a, array_b, tol=1e-8):
     """
-    :param array_a:
-    :param array_b:
-    :param tol:
-    :return:
+    :param array_a: array of size mxn
+    :param array_b: array of size mxn
+    :param tol: tolerance for differences in array values
+    :return: if array_a and array_b are within tolerance of another at every location
     """
+
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
-    return np.equal(array_a, array_b) and np.allclose(array_a, array_b, tol)  # [1]
+    return np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol)  # [1]
+
 
 def simple_minimizer(func_in, start, end, num=100):
     """
-    :param func_in:
-    :param start:
-    :param end:
-    :param num:
-    :return:
+    :param func_in: function reference for 1-D array manipulated by a function defined by user
+    :param start: where to start searching minimum in func_in
+    :param end: where to end searching for minimum in func_in
+    :param num: number of steps to take between the start and end parameters searching for minimum
+    :return: the original value from 1-D array before func_in was applied and the corresponding minimum value from
+             func_in
     """
     # make sure that prescribed start and end points move forward
     if start > end:
@@ -48,17 +50,18 @@ def simple_minimizer(func_in, start, end, num=100):
 
 def simulate_dice_rolls(num_rolls, iterations):
     """
-    :param num_rolls:
-    :param iterations:
-    :return:
+    :param num_rolls: number of rolls of a 6-sided die per iteration (game)
+    :param iterations: number of times to roll num_rolls (how many games)
+    :return: a) 1-D array of the sum of the dice rolls from each game (length=iterations)
+             b) Histogram of results
     """
     # Playing one game of die rolling num_rolls number of times and finding the sum of the rolls
     games = np.random.randint(0, num_rolls, size=(iterations, num_rolls))  # [3]
     # Sum each game in its respective sub-array and represent as a number in the main array
     scores = np.sum(games, axis=1)
     # Histogram plot
-    n, bins, patches = plt.hist(scores, 50, facecolor='blue', alpha=0.5)
-    #Saving plot
+    plt.hist(scores)
+    # Saving plot
     plt.savefig("dice_{}_rolls_{}.png".format(num_rolls, iterations))
     plt.show()
     return scores
@@ -66,8 +69,8 @@ def simulate_dice_rolls(num_rolls, iterations):
 
 def is_transformation_matrix(trans_matrix):
     """
-    :param trans_matrix:
-    :return:
+    :param trans_matrix: transformation matrix of size 4x4
+    :return: if the rotation matrix within transformation matrix is true or not
     """
     rot_matrix = np.delete(trans_matrix, 3, 0)  # Get rid of the last row
     rot_matrix = np.delete(rot_matrix, 3, 1)  # Get rid of the last column
@@ -77,7 +80,7 @@ def is_transformation_matrix(trans_matrix):
     inv = np.linalg.inv(rot_matrix)  # Calculate tbe inverse of the rotation matrix
 
     # If they are identical then the rotation matrix is valid
-    valid = np.equal(trans, inv)  # [1]
+    valid = np.array_equal(trans, inv)  # [1]
     if valid is True:
         return True
     else:
@@ -85,16 +88,39 @@ def is_transformation_matrix(trans_matrix):
 
 
 def nearest_neighbors(points, target, cutoff_dist):
-    dist = np.array(np.linalg.norm(points-target, ord=2, axis=1))
-    print(dist)
-    dist = dist[dist < cutoff_dist]
-    # dist = np.reshape(dist, (points.shape[0], 1))
-    indexes = np.argsort(dist)
-    return points[indexes]
+    """
+    :param points: array of points in 3-D euclidean space
+    :param target: reference point in 3-D euclidean
+    :param cutoff_dist: if a point is further than cutoff do not include it in output
+    :return: array of points in order of closest to furthest from the target
+    """
+    # use np.array to find the absolute distance of each point in 3-D euclidean space from the target
+    distances = np.array(np.linalg.norm(points-target, ord=2, axis=1))
+    # print('distances:')
+    # print(distances)
+
+    # Sort points according to distances
+    indexes = np.argsort(distances)
+    ordered_points = points[indexes]
+    # print('ordered_points')
+    # print(ordered_points)
+
+    # Filter points according to cutoff_distance
+    ordered_dist = np.array(np.linalg.norm(ordered_points-target, ord=2, axis=1))
+    # print('ordered_dist')
+    # print(ordered_dist)
+
+    cutoff_index = np.argmax(ordered_dist > cutoff_dist)
+    # print('cutoff_index')
+    # print(cutoff_index)
+
+    # Include only points within the cutoff_dist
+    filtered_points = ordered_points[:cutoff_index]
+
+    return filtered_points
 
 
-
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # a = np.arange(15).reshape(3, 5)
     # b = np.arange(15).reshape(3, 5)
     #
@@ -102,15 +128,15 @@ if __name__ == '__main__':
     # my_func = lambda x: x**2
     # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
-    # num_rolls = 5
-    # iterations = 2000
-    # print(np.zeros(num_rolls))
-    # print(r.randint(0, num_rolls))
-    # a = np.random.randint(0, num_rolls, num_rolls)  # [3]
+    # nu_rolls = 5
+    # it = 2000
+    # print(np.zeros(nu))
+    # print(r.randint(0, nu))
+    # a = np.random.randint(0, nu, nu)  # [3]
     # print(np.sum(a))
 
-    # print(np.array(np.sum(a), iterations))
-    # simulate_dice_rolls(num_rolls, iterations)
+    # print(np.array(np.sum(5), 2000))
+    # simulate_dice_rolls(5, 2000)
 
     # tf_valid = np.array([[0, 0, -1, 4], [0, 1, 0, 2.4], [1, 0, 0, 3], [0, 0, 0, 1]])
     # tf_invalid = np.array([[1, 2, 3, 1], [0, 1, -3, 4], [0, 1, 1, 1], [-0.5, 4, 0, 2]])
