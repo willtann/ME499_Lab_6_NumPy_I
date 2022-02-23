@@ -81,26 +81,21 @@ def is_transformation_matrix(trans_matrix):
 
     # Now we have the rotation matrix (I = R * R^T)
     transpose = rot_matrix.transpose()  # Calculate the transpose of rotation matrix (R^T)
-    print('transpose')
-    print(transpose)
+    # print('transpose')
+    # print(transpose)
     inverse = np.linalg.inv(rot_matrix)  # Calculate the inverse of rotation matrix (R^-1)
-    print('inverse')
-    print(inverse)
-    # determinant = np.linalg.det(rot_matrix)
-    # print('determinant')
-    # print(determinant)
-    # identity = np.identity(rot_matrix.shape[0])  # Calculate the identity matrix of rotation matrix (I)
-    # print('identity')
-    # print(identity)
+    # print('inverse')
+    # print(inverse)
 
     # If they are identical then the rotation matrix is valid
-    valid_rot = np.allclose(transpose, inverse)  # [1]
-    print('valid_rot')
-    print(valid_rot)
+    valid_rot = (np.allclose(transpose, inverse)) # [1]
+    # print('valid_rot:', valid_rot)
+    # print(type(valid_rot))
+
     # If the form of a transformation matrix is valid
-    valid_trans = ((trans_matrix, 3, 0) == [0, 0, 0, 1])
-    print('valid_trans')
-    print(valid_trans)
+    valid_trans = bool(np.alltrue((trans_matrix[3:]) == [0, 0, 0, 1]))
+    # print('valid_trans:', valid_trans)
+    # print(type(valid_trans))
 
     if valid_rot and valid_trans is True:
         return True
@@ -141,7 +136,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # a = np.arange(15).reshape(3, 5)
     # b = np.arange(15).reshape(3, 5)
     #
@@ -160,9 +155,9 @@ if __name__ == '__main__':
     # simulate_dice_rolls(1, 2000)
 
     # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
-    tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    # tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
     # tf_invalid = np.array([[0.70711, -0.70711, 0, 0], [0.70711, 0.70711, 0, 0], [0, 0, 1, 0], [0, 0, 0, 5]])
-    print(is_transformation_matrix(tf_valid))  # True
+    # print(is_transformation_matrix(tf_valid))  # True
     # print(is_transformation_matrix(tf_invalid))  # False
     #
     # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
