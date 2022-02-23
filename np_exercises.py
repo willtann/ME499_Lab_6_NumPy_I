@@ -142,13 +142,13 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
-    a = np.arange(15).reshape(3, 5)
-    b = np.arange(15).reshape(3, 5)
-    #
-    print('numpy_close: ', numpy_close(a, b))
-    my_func = lambda x: x**2
-    print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
+# if __name__ == '__main__':
+#     a = np.arange(15).reshape(3, 5)
+#     b = np.arange(15).reshape(3, 5)
+
+    # print('numpy_close: ', numpy_close(a, b))
+    # my_func = lambda x: x**2
+    # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
     # nu_rolls = 5
     # it = 2000
