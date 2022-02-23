@@ -116,7 +116,7 @@ if __name__ == '__main__':
     # tf_invalid = np.array([[1, 2, 3, 1], [0, 1, -3, 4], [0, 1, 1, 1], [-0.5, 4, 0, 2]])
     # print(is_transformation_matrix(tf_valid))  # True
     # print(is_transformation_matrix(tf_invalid))  # False
-
-    array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
-    target_pt = np.array([0, 1, 1])
-    print(nearest_neighbors(array, target_pt, 3.0))
+    #
+    # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
+    # target_pt = np.array([0, 1, 1])
+    # print(nearest_neighbors(array, target_pt, 3.0))
