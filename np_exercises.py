@@ -72,33 +72,33 @@ def is_transformation_matrix(trans_matrix):
     :param trans_matrix: transformation matrix of size 4x4
     :return: if the rotation matrix within transformation matrix is true or not
     """
-    if bool(np.all(trans_matrix) == 0):
+    if np.all(trans_matrix == 0):
         return False
     else:
-        print('trans_matrix')
-        print(trans_matrix)
+        # print('trans_matrix')
+        # print(trans_matrix)
         rot_matrix = np.delete(trans_matrix, 3, 0)  # Get rid of the last row
         rot_matrix = np.delete(rot_matrix, 3, 1)  # Get rid of the last column
-        print('rotation matrix')
-        print(rot_matrix)
+        # print('rotation matrix')
+        # print(rot_matrix)
 
         # Now we have the rotation matrix (I = R * R^T)
         transpose = rot_matrix.transpose()  # Calculate the transpose of rotation matrix (R^T)
-        print('transpose')
-        print(transpose)
+        # print('transpose')
+        # print(transpose)
         inverse = np.linalg.inv(rot_matrix)  # Calculate the inverse of rotation matrix (R^-1)
-        print('inverse')
-        print(inverse)
+        # print('inverse')
+        # print(inverse)
 
         # If they are identical then the rotation matrix is valid
         valid_rot = (np.allclose(transpose, inverse)) # [1]
-        print('valid_rot:', valid_rot)
-        print(type(valid_rot))
+        # print('valid_rot:', valid_rot)
+        # print(type(valid_rot))
 
         # If the form of a transformation matrix is valid
         valid_trans = bool(np.alltrue((trans_matrix[3:]) == [0, 0, 0, 1]))
-        print('valid_trans:', valid_trans)
-        print(type(valid_trans))
+        # print('valid_trans:', valid_trans)
+        # print(type(valid_trans))
 
         if valid_rot and valid_trans is True:
             return True
@@ -158,11 +158,11 @@ if __name__ == '__main__':
     # simulate_dice_rolls(1, 2000)
 
     # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
-    # tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-    # tf_invalid = np.array([[0.70711, -0.70711, 0, 0], [0.70711, 0.70711, 0, 0], [0, 0, 1, 0], [0, 0, 0, 5]])
-    tf_valid = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+    tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    tf_invalid = np.array([[0.70711, -0.70711, 0, 0], [0.70711, 0.70711, 0, 0], [0, 0, 1, 0], [0, 0, 0, 5]])
+    # tf_invalid = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
     print(is_transformation_matrix(tf_valid))  # True
-    # print(is_transformation_matrix(tf_invalid))  # False
+    print(is_transformation_matrix(tf_invalid))  # False
     #
     # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
     # target_pt = np.array([0, 1, 1])
