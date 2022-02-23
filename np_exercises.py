@@ -21,10 +21,7 @@ def numpy_close(array_a, array_b, tol=1e-8):
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
-    if np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol) is True:  # [1]
-        return True
-    else:
-        return False
+    return print(np.allclose(array_a, array_b, tol))
 
 
 def simple_minimizer(func_in, start, end, num=100):
