@@ -147,7 +147,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 #     a = np.arange(15).reshape(3, 5)
 #     b = np.arange(15).reshape(3, 5)
 
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     # print(np.sum(a))
 
     # print(np.array(np.sum(5), 2000))
-    simulate_dice_rolls(5, 200)
+    # simulate_dice_rolls(5, 200)
 
     # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
     # tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
