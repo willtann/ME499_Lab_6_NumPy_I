@@ -26,10 +26,10 @@ def numpy_close(array_a, array_b, tol=1e-8):
         diff = abs(array_a - array_b)
         # find where the differences are not within tolerance
         in_tol = np.isclose(array_a, array_b, tol)
-        final = diff[diff < tol]
+        final = np.any(diff < tol)
 
         # Return differences that are within tolerance
-        return in_tol
+        return final
 
     else:
         return False
