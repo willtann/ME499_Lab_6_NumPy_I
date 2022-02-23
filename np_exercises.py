@@ -26,6 +26,8 @@ def numpy_close(array_a, array_b, tol=1e-8):
         diff = abs(array_a - array_b)
         # If arrays have same shape, do all elements have a difference within tol?
         return np.all(diff < tol)
+    else:
+        return False
 
 
 def simple_minimizer(func_in, start, end, num=100):
