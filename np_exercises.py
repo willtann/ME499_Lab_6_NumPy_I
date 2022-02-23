@@ -21,7 +21,11 @@ def numpy_close(array_a, array_b, tol=1e-8):
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
-    return print(np.allclose(array_a, array_b, tol))
+    # if np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol):  # [1]
+    if (np.shape(array_a) == np.shape(array_b)) and np.allclose(array_a, array_b, tol):  # [1]
+        return True
+    else:
+        return False
 
 
 def simple_minimizer(func_in, start, end, num=100):
@@ -139,7 +143,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     a = np.arange(15).reshape(3, 5)
 #     b = np.arange(15).reshape(3, 5)
 
