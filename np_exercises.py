@@ -25,11 +25,11 @@ def numpy_close(array_a, array_b, tol=1e-8):
         # Find differences between the array indices
         diff = abs(array_a - array_b)
         # find where the differences are not within tolerance
-        # in_tol = np.isclose(array_a, array_b, tol)
+        in_tol = np.isclose(array_a, array_b, tol)
         final = diff[diff < tol]
 
         # Return differences that are within tolerance
-        return True and final
+        return in_tol
 
     else:
         return False
