@@ -24,15 +24,8 @@ def numpy_close(array_a, array_b, tol=1e-8):
     if np.shape(array_a) == np.shape(array_b):  # [1]
         # Find differences between the array indices
         diff = abs(array_a - array_b)
-        # find where the differences are not within tolerance
-        in_tol = np.isclose(array_a, array_b, tol)
-        final = np.any(diff < tol)
-
-        # Return differences that are within tolerance
-        return final
-
-    else:
-        return False
+        # If arrays have same shape, do all elements have a difference within tol?
+        return np.all(diff < tol)
 
 
 def simple_minimizer(func_in, start, end, num=100):
