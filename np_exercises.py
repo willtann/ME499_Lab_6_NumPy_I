@@ -21,8 +21,7 @@ def numpy_close(array_a, array_b, tol=1e-8):
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
-    return np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol)  # [1]
-
+    return np.equal(array_a, array_b) and np.allclose(array_a, array_b, tol)  # [1]
 
 def simple_minimizer(func_in, start, end, num=100):
     """
@@ -78,7 +77,7 @@ def is_transformation_matrix(trans_matrix):
     inv = np.linalg.inv(rot_matrix)  # Calculate tbe inverse of the rotation matrix
 
     # If they are identical then the rotation matrix is valid
-    valid = np.array_equal(trans, inv)  # [1]
+    valid = np.equal(trans, inv)  # [1]
     if valid is True:
         return True
     else:
