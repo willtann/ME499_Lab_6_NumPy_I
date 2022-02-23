@@ -25,13 +25,11 @@ def numpy_close(array_a, array_b, tol=1e-8):
         # Find differences between the array indices
         diff = abs(array_a - array_b)
         # find where the differences are not within tolerance
-        # less_than_tol = np.argwhere(diff < tol)
-        less_than_tol = np.all(abs((array_a - array_b) < tol))
-        print(less_than_tol)
+        # in_tol = np.isclose(array_a, array_b, tol)
+        final = diff[diff < tol]
+
         # Return differences that are within tolerance
-        # differences = np.array(array_a[less_than_tol] - array_b[less_than_tol])
-        # filtered_points = ordered_points[:cutoff_index]
-        return True and less_than_tol
+        return True and final
 
     else:
         return False
@@ -160,8 +158,7 @@ if __name__ == '__main__':
     a = np.arange(15).reshape(3, 5)
     b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
 
-
-    print('numpy_close: ', numpy_close(a, b))
+    print(numpy_close(a, b))
     # my_func = lambda x: x**2
     # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
