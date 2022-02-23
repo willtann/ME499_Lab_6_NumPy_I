@@ -134,7 +134,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # a = np.arange(15).reshape(3, 5)
     # b = np.arange(15).reshape(3, 5)
     #
@@ -154,8 +154,8 @@ if __name__ == '__main__':
 
     # tf_valid = np.array([[0, 0, -1, 4], [0, 1, 0, 2.4], [1, 0, 0, 3], [0, 0, 0, 1]])
     # tf_invalid = np.array([[1, 2, 3, 1], [0, 1, -3, 4], [0, 1, 1, 1], [-0.5, 4, 0, 2]])
-    tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
-    print(is_transformation_matrix(tf_valid))  # True
+    # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
+    # print(is_transformation_matrix(tf_valid))  # True
     # print(is_transformation_matrix(tf_invalid))  # False
     #
     # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
