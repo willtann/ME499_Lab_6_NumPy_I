@@ -24,7 +24,7 @@ def numpy_close(array_a, array_b, tol=1e-8):
     if np.shape(array_a) == np.shape(array_b):  # [1]
         # Find differences between the array indices
         diff = abs(array_a - array_b)
-        # If arrays have same shape, do all elements have a difference within tol?
+        # Are differences that are within tolerance
         return np.all(diff < tol)
     else:
         return False
@@ -149,11 +149,11 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-if __name__ == '__main__':
-    a = np.arange(15).reshape(3, 5)
-    b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
-
-    print(numpy_close(a, b))
+# if __name__ == '__main__':
+#     a = np.arange(15).reshape(3, 5)
+#     b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
+#
+#     print(numpy_close(a, b))
     # my_func = lambda x: x**2
     # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
