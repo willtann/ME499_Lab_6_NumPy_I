@@ -21,7 +21,10 @@ def numpy_close(array_a, array_b, tol=1e-8):
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes are within tolerance of another
-    return np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol)  # [1]
+    if np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol) is True:  # [1]
+        return True
+    else:
+        return False
 
 
 def simple_minimizer(func_in, start, end, num=100):
@@ -140,12 +143,12 @@ def nearest_neighbors(points, target, cutoff_dist):
 
 
 if __name__ == '__main__':
-    # a = np.arange(15).reshape(3, 5)
-    # b = np.arange(15).reshape(3, 5)
+    a = np.arange(15).reshape(3, 5)
+    b = np.arange(15).reshape(3, 5)
     #
-    # print('numpy_close: ', numpy_close(a, b))
-    # my_func = lambda x: x**2
-    # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
+    print('numpy_close: ', numpy_close(a, b))
+    my_func = lambda x: x**2
+    print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
     # nu_rolls = 5
     # it = 2000
@@ -158,11 +161,11 @@ if __name__ == '__main__':
     # simulate_dice_rolls(1, 2000)
 
     # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
-    tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-    tf_invalid = np.array([[0.70711, -0.70711, 0, 0], [0.70711, 0.70711, 0, 0], [0, 0, 1, 0], [0, 0, 0, 5]])
+    # tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    # tf_invalid = np.array([[0.70711, -0.70711, 0, 0], [0.70711, 0.70711, 0, 0], [0, 0, 1, 0], [0, 0, 0, 5]])
     # tf_invalid = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
-    print(is_transformation_matrix(tf_valid))  # True
-    print(is_transformation_matrix(tf_invalid))  # False
+    # print(is_transformation_matrix(tf_valid))  # True
+    # print(is_transformation_matrix(tf_invalid))  # False
     #
     # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
     # target_pt = np.array([0, 1, 1])
