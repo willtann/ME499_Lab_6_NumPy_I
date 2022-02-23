@@ -59,13 +59,14 @@ def simulate_dice_rolls(num_rolls, iterations):
     :return: a) 1-D array of the sum of the dice rolls from each game (length=iterations)
              b) Histogram of results
     """
-    # Playing one game of die rolling num_rolls number of times and finding the sum of the rolls
-    games = np.random.randint(0, num_rolls, size=(iterations, num_rolls))  # [3]
+    # Playing one game of die rolling 'num_rolls' die 'iteration' number of times
+    games = np.random.randint(1, 5, size=(iterations, num_rolls))  # [3]
+    # print(games)
     # Sum each game in its respective sub-array and represent as a number in the main array
     scores = np.sum(games, axis=1)
+
     # Histogram plot
     plt.hist(scores)
-    # Saving plot
     plt.savefig("dice_{}_rolls_{}.png".format(num_rolls, iterations))
     plt.show()
     return scores
@@ -159,7 +160,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     # print(np.sum(a))
 
     # print(np.array(np.sum(5), 2000))
-    # simulate_dice_rolls(1, 2000)
+    # simulate_dice_rolls(1, 20)
 
     # tf_valid = np.array([[1, 0, 0, 9.1], [0, -0.50485, -0.86321, 0], [0, 0.86321, -0.50485, 4], [0, 0, 0, 1]])
     # tf_valid = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
