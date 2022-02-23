@@ -21,11 +21,18 @@ def numpy_close(array_a, array_b, tol=1e-8):
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
     # Return True if same size and all indexes that are within tolerance of another
-    diff = abs(array_a - array_b)
-    less_than_tol = np.argwhere(diff < tol)
+    if np.shape(array_a) == np.shape(array_b):  # [1]
+        # Find differences between the array indices
+        diff = abs(array_a - array_b)
+        # find where the differences are not within tolerance
+        # less_than_tol = np.argwhere(diff < tol)
+        less_than_tol = np.all(abs((array_a - array_b) < tol))
+        print(less_than_tol)
+        # Return differences that are within tolerance
+        # differences = np.array(array_a[less_than_tol] - array_b[less_than_tol])
+        # filtered_points = ordered_points[:cutoff_index]
+        return True and less_than_tol
 
-    if np.shape(array_a) == np.shape(array_b):  # and np.allclose(array_a, array_b, tol):  # [1]
-        return True, less_than_tol
     else:
         return False
 
@@ -151,7 +158,7 @@ def nearest_neighbors(points, target, cutoff_dist):
 
 if __name__ == '__main__':
     a = np.arange(15).reshape(3, 5)
-    b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9, ], [10, 11, 12, 13, 14]]
+    b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
 
 
     print('numpy_close: ', numpy_close(a, b))
