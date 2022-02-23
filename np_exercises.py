@@ -20,10 +20,12 @@ def numpy_close(array_a, array_b, tol=1e-8):
 
     # 1. Check if arrays have the same dimensions
     # 2. Check if arrays indexes have differences of value within the tolerance
-    # Return True if same size and all indexes are within tolerance of another
-    # if np.array_equal(array_a, array_b) and np.allclose(array_a, array_b, tol):  # [1]
-    if (np.shape(array_a) == np.shape(array_b)) and np.allclose(array_a, array_b, tol):  # [1]
-        return True
+    # Return True if same size and all indexes that are within tolerance of another
+    diff = abs(array_a - array_b)
+    less_than_tol = np.argwhere(diff < tol)
+
+    if np.shape(array_a) == np.shape(array_b):  # and np.allclose(array_a, array_b, tol):  # [1]
+        return True, less_than_tol
     else:
         return False
 
@@ -99,7 +101,7 @@ def is_transformation_matrix(trans_matrix):
         # print(inverse)
 
         # If they are identical then the rotation matrix is valid
-        valid_rot = (np.allclose(transpose, inverse)) # [1]
+        valid_rot = (np.allclose(transpose, inverse))  # [1]
         # print('valid_rot:', valid_rot)
         # print(type(valid_rot))
 
@@ -147,11 +149,12 @@ def nearest_neighbors(points, target, cutoff_dist):
     return filtered_points
 
 
-# if __name__ == '__main__':
-#     a = np.arange(15).reshape(3, 5)
-#     b = np.arange(15).reshape(3, 5)
+if __name__ == '__main__':
+    a = np.arange(15).reshape(3, 5)
+    b = [[0, 1, 2, 3, 4], [5.1, 6, 7, 8, 9, ], [10, 11, 12, 13, 14]]
 
-    # print('numpy_close: ', numpy_close(a, b))
+
+    print('numpy_close: ', numpy_close(a, b))
     # my_func = lambda x: x**2
     # print('simple_minimizer: ', simple_minimizer(my_func, -1.75, 2.25, num=5))
 
