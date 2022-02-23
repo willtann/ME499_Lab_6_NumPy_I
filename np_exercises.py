@@ -167,7 +167,7 @@ def nearest_neighbors(points, target, cutoff_dist):
     # tf_invalid = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
     # print(is_transformation_matrix(tf_valid))  # True
     # print(is_transformation_matrix(tf_invalid))  # False
-    #
+
     # array = np.array([[1, 1, 1], [2, 3, 5], [0, 1, 1], [1.5, 1, 1], [10, 9, 9]])
     # target_pt = np.array([0, 1, 1])
     # print(nearest_neighbors(array, target_pt, 3.0))
